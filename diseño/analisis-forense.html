@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Forense Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* [Previous CSS styles remain exactly the same] */
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #172a45;
+            --accent-color: #64ffda;
+            --text-color: #e6f1ff;
+            --danger-color: #ff5555;
+            --success-color: #50fa7b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)),
+                        url('analisis.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            font-size: 1.6rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .audio-section {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--accent-color);
+            background: linear-gradient(rgba(23, 42, 69, 0.95), rgba(23, 42, 69, 0.95)),
+                        url('/api/placeholder/800/200');
+            background-size: cover;
+        }
+
+        .audio-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-player {
+            background-color: rgba(10, 25, 47, 0.7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        audio {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background: linear-gradient(rgba(23, 42, 69, 0.95), rgba(23, 42, 69, 0.95)),
+                        url('andatos.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateX(5px);
+        }
+
+        .section h2 {
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h3 {
+            color: var(--success-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-box {
+            background-color: rgba(10, 25, 47, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .list-item {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: '→';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box {
+            background-color: rgba(100, 255, 218, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .example-box {
+            background-color: rgba(80, 250, 123, 0.1);
+            border: 1px solid var(--success-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .tip-box {
+            background-color: rgba(100, 255, 218, 0.05);
+            border: 1px dashed var(--accent-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 4rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-search"></i> Análisis Forense Digital</h1>
+            <p>Investigación y análisis de evidencias digitales en ciberdelitos</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="audio-section">
+            <h3><i class="fas fa-headphones"></i> Guía de Audio Interactiva</h3>
+            <div class="audio-player">
+                <audio controls>
+                    <source src="analisis.mp3" type="audio/mp3">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i> Esta guía de audio explica los conceptos fundamentales del análisis forense digital y las metodologías de investigación.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-microscope"></i> Investigación de Ciberdelitos</h2>
+            <div class="content-box">
+                <p>La investigación forense digital requiere un enfoque metódico y documentado para garantizar la validez de las evidencias.</p>
+                
+                <div class="highlight-box">
+                    <h3>Metodología de Investigación</h3>
+                    <ul>
+                        <li class="list-item">Preservación de la escena digital</li>
+                        <li class="list-item">Documentación exhaustiva del proceso</li>
+                        <li class="list-item">Cadena de custodia</li>
+                        <li class="list-item">Análisis de evidencias digitales</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-trash-restore"></i> Recuperación de Datos</h2>
+            <div class="content-box">
+                <h3>Técnicas de Recuperación</h3>
+                <div class="example-box">
+                    <p><strong>Herramientas:</strong> Análisis de sectores, carving de archivos, recuperación de particiones</p>
+                </div>
+                
+                <h3>Tipos de Datos</h3>
+                <div class="example-box">
+                    <p><strong>Recuperación de:</strong> Archivos borrados, fragmentos de memoria, registros del sistema</p>
+                </div>
+
+                <h3>Dispositivos Soportados</h3>
+                <div class="example-box">
+                    <p><strong>Análisis de:</strong> Discos duros, dispositivos móviles, tarjetas de memoria, unidades SSD</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-bug"></i> Análisis de Malware</h2>
+            <div class="content-box">
+                <div class="list-item">
+                    <strong>Análisis Estático:</strong> Estudio del código sin ejecución
+                </div>
+                <div class="list-item">
+                    <strong>Análisis Dinámico:</strong> Comportamiento en entorno controlado
+                </div>
+                <div class="list-item">
+                    <strong>Ingeniería Inversa:</strong> Descompilación y análisis de código
+                </div>
+                
+                <div class="tip-box">
+                    <h3>Herramientas de Análisis</h3>
+                    <ul>
+                        <li class="list-item">Entornos virtuales seguros</li>
+                        <li class="list-item">Descompiladores y debuggers</li>
+                        <li class="list-item">Analizadores de tráfico</li>
+                        <li class="list-item">Monitores de sistema</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-network-wired"></i> Rastreo de Actividades</h2>
+            <div class="content-box">
+                <div class="highlight-box">
+                    <h3>Fuentes de Información</h3>
+                    <ul>
+                        <li class="list-item">Logs del sistema y aplicaciones</li>
+                        <li class="list-item">Registros de red y firewalls</li>
+                        <li class="list-item">Histórico de navegación</li>
+                        <li class="list-item">Metadatos de archivos</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h3>Técnicas de Análisis</h3>
+                    <ul>
+                        <li class="list-item">Correlación de eventos</li>
+                        <li class="list-item">Análisis de línea temporal</li>
+                        <li class="list-item">Mapeo de conexiones</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-gavel"></i> Evidencias Legales</h2>
+            <div class="content-box">
+                <p>La presentación de evidencias digitales en procesos legales requiere un manejo específico y documentado.</p>
+                <div class="highlight-box">
+                    <h3>Requisitos Legales</h3>
+                    <ul>
+                        <li class="list-item">Validación de integridad</li>
+                        <li class="list-item">Documentación del proceso</li>
+                        <li class="list-item">Preservación de evidencias</li>
+                        <li class="list-item">Cadena de custodia</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box">
+                    <h3>Documentación</h3>
+                    <ul>
+                        <li class="list-item">Informes técnicos detallados</li>
+                        <li class="list-item">Certificación de hallazgos</li>
+                        <li class="list-item">Presentación visual de evidencias</li>
+                        <li class="list-item">Testimonio experto</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

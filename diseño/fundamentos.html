@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de Ciberseguridad</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #172a45;
+            --accent-color: #64ffda;
+            --text-color: #e6f1ff;
+            --danger-color: #ff5555;
+            --success-color: #50fa7b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)),
+                        url('fundamentos.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            font-size: 1.6rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .audio-section {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--accent-color);
+            background: linear-gradient(rgba(23, 42, 69, 0.95), rgba(23, 42, 69, 0.95)),
+                        url('/api/placeholder/800/200');
+            background-size: cover;
+        }
+
+        .audio-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-player {
+            background-color: rgba(10, 25, 47, 0.7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        audio {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background: linear-gradient(rgba(23, 42, 69, 0.95), rgba(23, 42, 69, 0.95)),
+                        url('fund.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateX(5px);
+        }
+
+        .section h2 {
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h3 {
+            color: var(--success-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-box {
+            background-color: rgba(10, 25, 47, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .list-item {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: '→';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box {
+            background-color: rgba(100, 255, 218, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .example-box {
+            background-color: rgba(80, 250, 123, 0.1);
+            border: 1px solid var(--success-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .tip-box {
+            background-color: rgba(100, 255, 218, 0.05);
+            border: 1px dashed var(--accent-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 4rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-shield-alt"></i> Fundamentos de Ciberseguridad</h1>
+            <p>Descubre los principios básicos que mantienen segura la información digital</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="audio-section">
+            <h3><i class="fas fa-headphones"></i> Guía de Audio Interactiva</h3>
+            <div class="audio-player">
+                <audio controls>
+                    <source src="fundamentos.mp3" type="audio/mp3">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i> Esta guía de audio proporciona una explicación detallada de los conceptos fundamentales de ciberseguridad.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-book"></i> Conceptos Básicos de Seguridad Informática</h2>
+            <div class="content-box">
+                <p>La seguridad informática abarca el conjunto de medidas preventivas y reactivas que permiten resguardar y proteger la información. En la era digital actual, estas medidas son cruciales para proteger tanto datos personales como corporativos.</p>
+                
+                <div class="highlight-box">
+                    <h3>Importancia de la Seguridad Informática</h3>
+                    <p>La seguridad informática es fundamental en la era digital, donde la información es uno de los activos más valiosos. Protege contra:</p>
+                    <ul>
+                        <li class="list-item">Robo de información sensible</li>
+                        <li class="list-item">Pérdidas económicas</li>
+                        <li class="list-item">Daño reputacional</li>
+                        <li class="list-item">Interrupciones operativas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-lock"></i> Principios CIA</h2>
+            <div class="content-box">
+                <h3>Confidencialidad</h3>
+                <p>Garantiza que la información sea accesible únicamente a las personas autorizadas.</p>
+                <div class="example-box">
+                    <p><strong>Ejemplo:</strong> El uso de contraseñas seguras, cifrado de datos y control de acceso.</p>
+                </div>
+                
+                <h3>Integridad</h3>
+                <p>Asegura que la información no ha sido alterada o modificada sin autorización.</p>
+                <div class="example-box">
+                    <p><strong>Ejemplo:</strong> Firmas digitales, checksums y sistemas de control de versiones.</p>
+                </div>
+                
+                <h3>Disponibilidad</h3>
+                <p>Garantiza el acceso a la información cuando sea necesario.</p>
+                <div class="example-box">
+                    <p><strong>Ejemplo:</strong> Sistemas redundantes, copias de seguridad y planes de continuidad del negocio.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-bug"></i> Tipos de Amenazas y Vulnerabilidades</h2>
+            <div class="content-box">
+                <div class="list-item">
+                    <strong>Malware:</strong> Incluye virus, troyanos, ransomware, spyware y gusanos. Cada tipo tiene diferentes objetivos y métodos de propagación.
+                </div>
+                <div class="list-item">
+                    <strong>Ingeniería social y phishing:</strong> Manipulación psicológica para obtener información confidencial.
+                </div>
+                <div class="list-item">
+                    <strong>Ataques de denegación de servicio (DoS/DDoS):</strong> Sobrecarga de sistemas para interrumpir servicios.
+                </div>
+                <div class="list-item">
+                    <strong>Vulnerabilidades de software y hardware:</strong> Debilidades en sistemas que pueden ser explotadas.
+                </div>
+                
+                <div class="tip-box">
+                    <h3>Consejos de Prevención</h3>
+                    <ul>
+                        <li class="list-item">Mantener sistemas actualizados</li>
+                        <li class="list-item">Usar software antivirus</li>
+                        <li class="list-item">Implementar firewalls</li>
+                        <li class="list-item">Educar a usuarios sobre seguridad</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-sync"></i> Ciclo de Vida de la Ciberseguridad</h2>
+            <div class="content-box">
+                <div class="list-item">
+                    <strong>Identificación de activos y riesgos:</strong> Inventario de recursos críticos y evaluación de amenazas potenciales.
+                </div>
+                <div class="list-item">
+                    <strong>Protección y prevención:</strong> Implementación de controles de seguridad y medidas preventivas.
+                </div>
+                <div class="list-item">
+                    <strong>Detección de amenazas:</strong> Monitoreo continuo y sistemas de alerta temprana.
+                </div>
+                <div class="list-item">
+                    <strong>Respuesta a incidentes:</strong> Protocolos de acción ante violaciones de seguridad.
+                </div>
+                <div class="list-item">
+                    <strong>Recuperación y mejora continua:</strong> Restauración de sistemas y aprendizaje de incidentes.
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
