@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguridad en la Nube</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #172a45;
+            --accent-color: #64ffda;
+            --text-color: #e6f1ff;
+            --danger-color: #ff5555;
+            --success-color: #50fa7b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)),
+                        url('nube.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            font-size: 1.6rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .audio-section {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--accent-color);
+            background: linear-gradient(rgba(23, 42, 69, 0.95), rgba(23, 42, 69, 0.95)),
+                        url('/api/placeholder/800/200');
+            background-size: cover;
+        }
+
+        .audio-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-player {
+            background-color: rgba(10, 25, 47, 0.7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        audio {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background: linear-gradient(rgba(23, 42, 69, 0.95), rgba(23, 42, 69, 0.95)),
+                        url('nubeseg.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateX(5px);
+        }
+
+        .section h2 {
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h3 {
+            color: var(--success-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .content-box {
+            background-color: rgba(10, 25, 47, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .list-item {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: '→';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .highlight-box {
+            background-color: rgba(100, 255, 218, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .example-box {
+            background-color: rgba(80, 250, 123, 0.1);
+            border: 1px solid var(--success-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .tip-box {
+            background-color: rgba(100, 255, 218, 0.05);
+            border: 1px dashed var(--accent-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 4rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-cloud"></i> Seguridad en la Nube</h1>
+            <p>Protegiendo infraestructuras y datos en entornos cloud</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="audio-section">
+            <h3><i class="fas fa-headphones"></i> Guía de Audio Interactiva</h3>
+            <div class="audio-player">
+                <audio controls>
+                    <source src="nube.mp3" type="audio/mp3">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                <div class="tip-box">
+                    <i class="fas fa-info-circle"></i> Esta guía de audio explica los conceptos fundamentales de la seguridad en la nube y las mejores prácticas para la protección de infraestructuras cloud.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-shield-alt"></i> Protección de Datos en la Nube</h2>
+            <div class="content-box">
+                <p>La protección de datos en entornos cloud requiere un enfoque integral que considere múltiples capas de seguridad.</p>
+                
+                <div class="highlight-box">
+                    <h3>Aspectos Clave</h3>
+                    <ul>
+                        <li class="list-item">Cifrado de datos en reposo y en tránsito</li>
+                        <li class="list-item">Control de acceso y gestión de identidades</li>
+                        <li class="list-item">Monitorización y auditoría continua</li>
+                        <li class="list-item">Segregación de datos entre clientes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-server"></i> Plataformas Cloud</h2>
+            <div class="content-box">
+                <h3>Amazon Web Services (AWS)</h3>
+                <div class="example-box">
+                    <p><strong>Servicios de Seguridad:</strong> AWS IAM, GuardDuty, Security Hub, WAF</p>
+                </div>
+                
+                <h3>Microsoft Azure</h3>
+                <div class="example-box">
+                    <p><strong>Servicios de Seguridad:</strong> Azure Active Directory, Security Center, Sentinel</p>
+                </div>
+
+                <h3>Google Cloud Platform</h3>
+                <div class="example-box">
+                    <p><strong>Servicios de Seguridad:</strong> Cloud IAM, Security Command Center, Cloud KMS</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-cogs"></i> Configuración Segura</h2>
+            <div class="content-box">
+                <div class="list-item">
+                    <strong>Identity and Access Management (IAM):</strong> Gestión de roles y permisos
+                </div>
+                <div class="list-item">
+                    <strong>Redes virtuales:</strong> Segmentación y control de tráfico
+                </div>
+                <div class="list-item">
+                    <strong>Almacenamiento:</strong> Políticas de acceso y cifrado
+                </div>
+                
+                <div class="tip-box">
+                    <h3>Mejores Prácticas</h3>
+                    <ul>
+                        <li class="list-item">Principio de mínimo privilegio</li>
+                        <li class="list-item">Monitorización de recursos</li>
+                        <li class="list-item">Automatización de seguridad</li>
+                        <li class="list-item">Actualizaciones regulares</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-clipboard-check"></i> Cumplimiento Normativo</h2>
+            <div class="content-box">
+                <div class="highlight-box">
+                    <h3>Marcos de Cumplimiento</h3>
+                    <ul>
+                        <li class="list-item">GDPR para datos personales</li>
+                        <li class="list-item">HIPAA para información médica</li>
+                        <li class="list-item">PCI DSS para datos de pagos</li>
+                        <li class="list-item">ISO 27001/27017/27018</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h3>Herramientas de Cumplimiento</h3>
+                    <ul>
+                        <li class="list-item">Registros de auditoría</li>
+                        <li class="list-item">Informes de cumplimiento</li>
+                        <li class="list-item">Certificaciones cloud</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-chart-line"></i> Gestión de Riesgos</h2>
+            <div class="content-box">
+                <p>La gestión de riesgos en infraestructuras cloud requiere una evaluación continua y adaptativa.</p>
+                <div class="highlight-box">
+                    <h3>Proceso de Gestión</h3>
+                    <ul>
+                        <li class="list-item">Identificación de activos y amenazas</li>
+                        <li class="list-item">Evaluación de vulnerabilidades</li>
+                        <li class="list-item">Implementación de controles</li>
+                        <li class="list-item">Monitorización y mejora continua</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box">
+                    <h3>Herramientas de Gestión</h3>
+                    <ul>
+                        <li class="list-item">CSPM (Cloud Security Posture Management)</li>
+                        <li class="list-item">CWPP (Cloud Workload Protection Platform)</li>
+                        <li class="list-item">CASB (Cloud Access Security Broker)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
